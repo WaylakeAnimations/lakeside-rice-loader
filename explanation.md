@@ -1,9 +1,15 @@
-### How `apply-general.sh` works
+## About `lsrl.sh`
 
-`./apply-general.sh [rice-set]`
+This is the script you'll (in)directly interact with to switch between rice sets...
 
-- Make symlink of rice set folder in the home directory for easier access
-- Execute rice set's `start.sh`
-- Set GTK and icon theme specified by the rice set
-- Make symlink of rice set's `stop.sh` in `./cache` for easier access when switching to another rice set
-- Write the name of the applied rice set to `./current.txt`
+```
+./lsrl.sh [rice-set]
+```
+
+### How it works _(in order):_
+
+- "Close previous rice" with `~/lsrl-loaded/stop.sh`
+- Symlink newly selected rice set folder to `~/lsrl-loaded` for easier access
+- Execute `./lsrl-loaded/start.sh`
+- Apply GTK and icon theme specified by the rice set
+- Write the name of applied rice set to `./current.txt`
