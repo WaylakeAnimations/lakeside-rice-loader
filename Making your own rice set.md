@@ -1,10 +1,6 @@
-# Supported stuff
+# Getting Started
 
-While you _can_ make this work with many things, in terms of WM and Wallpaper, this only _officially_ support Hyprland and Hyprpaper respectively...
-
-For other things like bars and widgets, you can pick whatever you want...
-
-# Rice set structure
+Arrange your rice set folder like this
 
 ```
 - your-rice-set
@@ -19,10 +15,12 @@ For other things like bars and widgets, you can pick whatever you want...
   - stop.sh
 ```
 
+Then add your configs, i recommend starting with your bar and widget configs first...
+
 ### `.config`
 Contain configs and files that are relevant for your rice set...
 
-### `lslr-rice-specific.conf`
+### `lsrl-rice-specific.conf`
 Hyprland config glob, should only be used to change the visuals (e.g. adding layer rules for widgets)...
 
 ### `wallpaper`
@@ -53,11 +51,11 @@ Of course after checking whether the process is there or not, if not, then start
 
 Some stuff may require some care and attention, let's use _Kitty_ for example, your options are...
 - Change _everything_ that could start Kitty (.desktop entry, Hyprland hotkey, etc.) to include your config argument...
-- Use `include` entry...
+- Use `include`...
 
 ### Using multiple configs
 
-Many things support globbing _(reading multiple configs),_ therefore you can do the `lsrl-rice-specific.conf` treatment for those stuff...
+Many things can read multiple configs, therefore you can do the `lsrl-rice-specific.conf` treatment for those stuff...
 
 ```bash
 # Check if the include entry doesn't exist yet
