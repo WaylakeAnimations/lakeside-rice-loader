@@ -17,12 +17,17 @@ If you want it to remember the rice set that was selected, replace `[rice-name]`
 ```bash
 $(cat ~/.local/share/lakeside-rice-loader/current.txt)
 ```
-_todo:_
-- _make launching last rice set built-in (perhaps with -r flag)_
-- _use axolotl as fallback when no rice set name entered_
-- _add --help and -h_
 
 ## Fun Fact
 This entire thing was started when i needed a quick way to make my Hyprland rice look family-friendly...
 
 Specifically, a time when i was studying in school (i wanted to make Hanako-themed rice at the time)...
+
+todo:
+- use axolotl as fallback when no rice set name entered
+- add -r to (re)launch last rice set
+- add --help and -h
+- add --init [rice-set-name]
+- include walker/elephant rice set selector
+- change config fragment naming convention from `lsrl-rice-specific.*` to `*-lr.*` (example: `hyprlock-lr.conf`, `hyprland-lr.conf`, etc.)
+- add fastfetch config folder to gitignore (i can already imagine some people calling me narcissistic because i accidentally uploaded my old pfp there)
