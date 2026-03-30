@@ -1,0 +1,111 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 20,
+    // "width": 1280,
+    "spacing": 4, // Gaps between modules (4px)
+
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "memory",
+        "pulseaudio",
+        "battery",
+        "backlight",
+        "tray",
+	"custom/notification"
+    ],
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+    "clock": {
+	"format": "{:%H:%M - %d-%b-%Y}",
+	"tooltip": true,
+	"tooltip-format": "<tt>{calendar}</tt>",
+	"calendar": {
+		"mode": "month",
+		"mode-mon-col": 3,
+		"weeks-pos": "",
+		"on-scroll": 1,
+		"on-click-right": "mode",
+		"format": {
+			"months": "<span color='#2FB4FF'><b>{}</b></span>",
+			"days": "<span color='#ffffff'><b>{}</b></span>",
+			"weekdays": "<span color='#9a9a9a'><b>{}</b></span>",
+			"today": "<span color='#ffa101'><b>{}</b></span>"
+			}
+		},
+	"actions": {
+		"on-click-right": "mode",
+		"on-scroll-up": "shift_up",
+		"on-scroll-down": "shift_down",
+		}
+    },
+    "memory": {
+	"interval": 3,
+        "format": "RAM : {used} GiB / {total} GiB",
+	"on-click": "kitty htop",
+	"on-click-right": "kitty s-tui",
+	"tooltip": true,
+	"tooltip-format": "LMB : htop // RMB : s-tui"
+    },
+    "backlight": {
+        "format": "{percent}% {icon}",
+        "scroll-step": 2,
+	"tooltip": true,
+	"tooltip-format": "Brightness, click to toggle night light",
+	"on-click": "/home/Waylake/.config/gammastep/toggle-gammastep.sh",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "format": "{capacity}% {icon} ",
+        "format-full": "{capacity}% {icon} ",
+        "format-charging": "{capacity}%  ",
+        "format-plugged": "{capacity}%  ",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "pulseaudio": {
+        "scroll-step": 2,
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": "",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    }
+}

@@ -1,0 +1,137 @@
+* {
+    font-family: FontAwesome, Outfit, Arial, sans-serif;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: transparent;
+    border-bottom: 0px rgba(0, 0, 0, 0);
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button {
+    padding: 0 3px;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+#workspaces button:hover {
+    background: transparent;
+}
+
+#workspaces button.active {
+    box-shadow: inset 0 -3px #3498db;
+}
+
+#workspaces button.urgent {
+    box-shadow: inset 0 -3px #f0544c;
+}
+
+#mode {
+    background-color: #64727D;
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces {
+    background-color: #000000;
+    border-radius: 5px;
+    border:1px solid #3498db;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+#clock {
+    background-color: #000000;
+    border-radius: 5px;
+    border:1px solid #3498db;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#battery {
+    background-color: #000000;
+    border-radius: 5px;
+    border:1px solid #3498db;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#custom-notification {
+    background-color: #000000;
+    border-radius: 5px;
+    border:1px solid #3498db;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#memory {
+    background-color: #000000;
+    border-radius: 5px;
+    border:1px solid #3498db;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#backlight {
+    background-color: #000000;
+    border-radius: 5px;
+    border:1px solid #3498db;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#pulseaudio {
+    background-color: #000000;
+    border-radius: 5px;
+    border:1px solid #3498db;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#tray {
+    background-color: #000000;
+    border-radius: 5px;
+    border:1px solid #3498db;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#custom-theme {
+    background-color: #000000;
+    border-radius: 5px;
+    border:1px solid #3498db;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#custom-mpvpaper-toggle {
+    background-color: #000000;
+    border-radius: 5px;
+    border:1px solid #3498db;
+    padding-left: 10px;
+    padding-right: 10px;
+}
