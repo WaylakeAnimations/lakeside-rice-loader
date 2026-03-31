@@ -6,7 +6,7 @@ Arrange your rice set folder like this
 - your-rice-set
   - [dir] .config
     - [dir] hypr
-      - lsrl-rice-specific.conf
+      - hyprland-lr.conf
   - [dir] wallpaper
     - static.png
     - live.mp4
@@ -20,7 +20,7 @@ Then add your configs, i recommend starting with your bar and widget configs fir
 ### `.config`
 Contain configs and files that are relevant for your rice set...
 
-### `lsrl-rice-specific.conf`
+### `hyprland-lr.conf`
 Hyprland config glob, should only be used to change the visuals (e.g. adding layer rules for widgets)...
 
 ### `wallpaper`
@@ -55,30 +55,30 @@ Some stuff may require some care and attention, let's use _Kitty_ for example, y
 
 ### Using multiple configs
 
-Many things can read multiple configs, therefore you can do the `lsrl-rice-specific.conf` treatment for those stuff...
+Many things can read multiple configs, therefore you can do the `*-lr.*` treatment for those stuff...
 
 ```bash
 # Check if the include entry doesn't exist yet
-if [ $(cat ~/.config/kitty/kitty.conf | grep -c "include ~/lsrl-loaded/.config/kitty/lsrl-rice-specific.conf") -eq 0 ]; then
+if [ $(cat ~/.config/kitty/kitty.conf | grep -c "include ~/lsrl-loaded/.config/kitty/kitty-lr.conf") -eq 0 ]; then
 
     # Append include entry and extra newlines just in case (tee with append flag)
-    printf '\ninclude ~/lsrl-loaded/.config/kitty/lsrl-rice-specific.conf\n' | tee -a ~/.config/kitty/kitty.conf
+    printf '\ninclude ~/lsrl-loaded/.config/kitty/kitty-lr.conf\n' | tee -a ~/.config/kitty/kitty.conf
 fi
 ```
 
-**Keep parsing order in mind,** in a situation where multiple entries of the same type exists, some softwares prioritize highest entry, while others prioritize lowest entry...
+In a situation where multiple entries of the same type exists, some softwares prioritize highest entry, while others _might_ prioritize lowest entry...
 
-Another example (`include` entry on the top)
+Another example with `include` entry on the top instead on the bottom...
 
 ```bash
 # Check if the include entry doesn't exist yet
-if [ $(cat ~/.config/foo/foo.whatever | grep -c "include ~/lsrl-loaded/.config/foo/lsrl-rice-specific.whatever") -eq 0 ]; then
+if [ $(cat ~/.config/foo/foo.whatever | grep -c "include ~/lsrl-loaded/.config/foo/foo-lr.whatever") -eq 0 ]; then
 
     # Put original config aside
     mv ~/.config/foo/foo.whatever ~/.config/foo/foo.whatever-temp
 
     # Add include entry to prepend
-    printf 'include ~/lsrl-loaded/.config/foo/lsrl-rice-specific.whatever\n' > ~/.config/foo/foo.whatever
+    printf 'include ~/lsrl-loaded/.config/foo/foo-lr.whatever\n' > ~/.config/foo/foo.whatever
 
     # Put content of original config back (tee with append flag)
     cat ~/.config/foo/foo.whatever-temp | tee -a ~/.config/foo/foo.whatever
@@ -110,8 +110,11 @@ Example snippet of `stop.sh`
 
 ```bash
 # Restore config to previous state
+rm ~/.config/john-terminal/bar.conf
 mv ~/.config/john-terminal/bar.conf1 ~/.config/john-terminal/bar.conf
 ```
+
+You can also do that with `.config` subdirectories instead of one file at a time, but make sure to adjust the command flags accordingly
 
 # Writing `stop.sh`
 

@@ -121,17 +121,3 @@ button:hover {
     padding-left: 10px;
     padding-right: 10px;
 }
-#custom-theme {
-    background-color: #000000;
-    border-radius: 5px;
-    border:1px solid #3498db;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-#custom-mpvpaper-toggle {
-    background-color: #000000;
-    border-radius: 5px;
-    border:1px solid #3498db;
-    padding-left: 10px;
-    padding-right: 10px;
-}
