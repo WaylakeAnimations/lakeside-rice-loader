@@ -9,7 +9,7 @@ if [ -z $1 ] ; then
     exit 69
 
 # print help if $1 is --help or -h
-elif [ $1 = --help ] || [ $1 = -h ]; then
+elif [ $1 = "--help" ] || [ $1 = "-h" ]; then
 
 printf "\nLakeside Rice Loader (https://github.com/WaylakeAnimations/lakeside-rice-loader)
 Switch between rice sets, initialize new rice set, and more...
@@ -33,7 +33,7 @@ Exit codes:
     exit 0
 
 # check if $1 is --init
-elif [ $1 = --init ] || [ $1 = -i ]; then
+elif [ $1 = "--init" ] || [ $1 = "-i" ]; then
     # check if $2 is empty
     if [ -z $2 ] ; then
         printf "\n$NAME <name> is required (check -h)\n\n"
@@ -46,7 +46,7 @@ elif [ $1 = --init ] || [ $1 = -i ]; then
     fi
 
 # take $RICE_SET from current.txt if $1 is --relaunch or -r
-elif [ $1 = --relaunch ] || [ $1 = -r ]; then
+elif [ $1 = "--relaunch" ] || [ $1 = "-r" ]; then
     RICE_SET=$(cat $LSRL_PATH/current.txt)
 
 else
@@ -75,6 +75,6 @@ gsettings set org.gnome.desktop.interface gtk-theme $GTKT
 gsettings set org.gnome.desktop.interface icon-theme $ICONT
 
 # Write selected rice set folder name to a file
-echo $1 > $LSRL_PATH/current.txt
+echo $1 | tee $LSRL_PATH/current.txt
 
 exit 0
