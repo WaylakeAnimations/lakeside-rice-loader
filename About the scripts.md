@@ -13,7 +13,6 @@ Flags:
 
 ```
   -h, --help         Display informations about this script
-                     (vro, this is literally the thing you just opened)
   -r, --relaunch     (Re)launch last rice set (reads from ./current.txt)
   -i, --init <name>  Initialize a new rice set project
 ```
@@ -25,3 +24,21 @@ Flags:
 - Execute `./lsrl-loaded/start.sh`
 - Apply GTK and icon theme specified by the rice set
 - Write the name of applied rice set to `./current.txt`
+
+## About `text-appender.sh`
+
+Use this to add `include` entries (or any variants of that) to config files...
+
+Recommended usage:
+
+```
+  appender.sh [flag] <text> <file>
+```
+
+Flags:
+
+```
+  -h, --help   show this
+  -t  place    <text> on the top of <file> (prepend)
+  -b  place    <text> on the bottom of <file> (append)
+```

@@ -43,6 +43,10 @@ printf ']{
 
 printf "#!/bin/bash
 
+# set lsrl path variable (one -> represent one dirname command)
+# start.sh directory -> rice set folder dir -> rice-sets folder dir -> lslr folder dir
+LSRL_PATH=$(dirname $(dirname $(dirname "$(readlink -f "$0")")))
+
 hyprctl reload
 hyprctl hyprpaper wallpaper ' , ~/lsrl-loaded/wallpaper/static.png, fill'
 

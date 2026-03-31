@@ -57,35 +57,14 @@ Some stuff may require some care and attention, let's use _Kitty_ for example, y
 
 Many things can read multiple configs, therefore you can do the `*-lr.*` treatment for those stuff...
 
-```bash
-# Check if the include entry doesn't exist yet
-if [ $(cat ~/.config/kitty/kitty.conf | grep -c "include ~/lsrl-loaded/.config/kitty/kitty-lr.conf") -eq 0 ]; then
-
-    # Append include entry and extra newlines just in case (tee with append flag)
-    printf '\ninclude ~/lsrl-loaded/.config/kitty/kitty-lr.conf\n' | tee -a ~/.config/kitty/kitty.conf
-fi
-```
-
-In a situation where multiple entries of the same type exists, some softwares prioritize highest entry, while others _might_ prioritize lowest entry...
-
-Another example with `include` entry on the top instead on the bottom...
+Keep ordering in mind, some softwares prioritize highest entry, while others prioritize lowest entry...
 
 ```bash
-# Check if the include entry doesn't exist yet
-if [ $(cat ~/.config/foo/foo.whatever | grep -c "include ~/lsrl-loaded/.config/foo/foo-lr.whatever") -eq 0 ]; then
+# place at the bottom
+bash $LSRL_PATH/text-appender.sh -b "include ~/lsrl-loaded/.config/kitty/kitty-lr.conf" "~/.config/kitty/kitty.conf"
 
-    # Put original config aside
-    mv ~/.config/foo/foo.whatever ~/.config/foo/foo.whatever-temp
-
-    # Add include entry to prepend
-    printf 'include ~/lsrl-loaded/.config/foo/foo-lr.whatever\n' > ~/.config/foo/foo.whatever
-
-    # Put content of original config back (tee with append flag)
-    cat ~/.config/foo/foo.whatever-temp | tee -a ~/.config/foo/foo.whatever
-
-    # Remove temporary file
-    rm ~/.config/foo/foo.whatever-temp
-fi
+# place at the top
+bash $LSRL_PATH/text-appender.sh -t "source = ~/lsrl-loaded/.config/foo/foo-lr.conf" "~/.config/foo/foo.conf"
 ```
 
 Most software won't complain about missing files in `include` entries if it has values in the main config file that it can fall back to, so you won't have to worry about removing it...
