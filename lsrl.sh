@@ -32,10 +32,6 @@ Exit codes:
 
     exit 0
 
-# take $RICE_SET from current.txt if $1 is --relaunch or -r
-elif [ $1 = --relaunch ] || [ $1 = -r ]; then
-    RICE_SET=$(cat $LSRL_PATH/current.txt)
-
 # check if $1 is --init
 elif [ $1 = --init ] || [ $1 = -i ]; then
     # check if $2 is empty
@@ -48,10 +44,15 @@ elif [ $1 = --init ] || [ $1 = -i ]; then
         $LSRL_PATH/project-init.sh iHopeThisSentenceDoesntExistInDictionaries $2
         exit 0
     fi
-fi
 
-# If $1 isn't any of the flags AND isn't empty, $RICE_SET can take it
-RICE_SET=$1
+# take $RICE_SET from current.txt if $1 is --relaunch or -r
+elif [ $1 = --relaunch ] || [ $1 = -r ]; then
+    RICE_SET=$(cat $LSRL_PATH/current.txt)
+
+else
+    # If $1 isn't any of the flags AND isn't empty, $RICE_SET can take it
+    RICE_SET=$1
+fi
 
 # "Close current rice set
 bash ~/lsrl-loaded/stop.sh
