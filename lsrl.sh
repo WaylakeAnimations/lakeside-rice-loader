@@ -27,6 +27,7 @@ Flags:
 
 Exit codes:
   0:  Task done (not failed) successfully
+  3:  Missing rice folder
   64: Unintended usage detected
   69: Missing input(s)\n\n"
 
@@ -34,27 +35,43 @@ Exit codes:
 
 # check if "$1" is --init
 elif [ "$1" = "--init" ] || [ "$1" = "-i" ]; then
-    # check if "$2" is empty
-    if [ -z "$2" ] ; then
+
+    # check if "$2" is filled
+    if [ ! -z "$2" ] ; then
+
+        # if "$2" got filled in, sart a separate project initializing script
+        "$LSRL_PATH/project-init.sh" iHopeThisSentenceDoesntExistInDictionaries "$2"
+        exit 0
+
+    else
         printf "\n$NAME <name> is required (check -h)\n\n"
         # tbh, i didn't put much thoughts into picking the exit codes
         exit 69
-    else
-        # if "$2" got filled in, sart a separate project initializing script
-        $LSRL_PATH/project-init.sh iHopeThisSentenceDoesntExistInDictionaries "$2"
-        exit 0
     fi
-
-# take $RICE_SET from current.txt if "$1" is --relaunch or -r
-elif [ "$1" = "--relaunch" ] || [ "$1" = "-r" ]; then
-    RICE_SET=$(cat $LSRL_PATH/current.txt)
-
-else
-    # If "$1" isn't any of the flags AND isn't empty, $RICE_SET can take it
-    RICE_SET="$1"
 fi
 
-# "Close current rice set
+# check for -r first
+if [ "$1" = "--relaunch" ] || [ "$1" = "-r" ]; then
+
+    # take $RICE_SET from current.txt, but only if its content is valid
+    if [[ -f "$LSRL_PATH/current.txt" && -f "$LSRL_PATH/rice-sets/$(cat "$LSRL_PATH/current.txt")/rice.json" ]]; then
+        RICE_SET=$(cat "$LSRL_PATH/current.txt")
+
+    else # (fallback to axolotl)
+        RICE_SET="axolotl"
+    fi
+
+# If "$1" isn't any of the flags AND isn't empty, $RICE_SET can take it
+# but still... check if specified rice is valid
+elif [[ -f "$LSRL_PATH/rice-sets/"$1"/rice.json" ]]; then
+    RICE_SET="$1"
+
+else
+    printf "\n$NAME $1 not found\n\n"
+    exit 3
+fi
+
+# "Close current rice set"
 bash ~/lsrl-loaded/stop.sh
 
 # "Replace symlink
@@ -75,6 +92,6 @@ gsettings set org.gnome.desktop.interface gtk-theme $GTKT
 gsettings set org.gnome.desktop.interface icon-theme $ICONT
 
 # Write selected rice set folder name to a file
-echo "$1" | tee $LSRL_PATH/current.txt
+echo "$RICE_SET" | tee "$LSRL_PATH/current.txt"
 
 exit 0

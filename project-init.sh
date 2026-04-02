@@ -4,12 +4,12 @@ LSRL_PATH=$(dirname "$(readlink -f "$0")")
 NAME=[LSRL-init]
 
 # unintended usage detection
-if [ -z $1 ]; then
+if [ -z "$1" ]; then
     printf "\n$NAME nah, that's not how you use this, check ./lsrl -h\n\n"
     exit 64
 
 elif [ $1 = iHopeThisSentenceDoesntExistInDictionaries ]; then
-    if [ -z $2 ]; then
+    if [ -z "$2" ]; then
 
         printf "\n$NAME wait, if there was no folder name specified, ./lsrl.sh should've caught it by itself...
 
@@ -47,8 +47,15 @@ printf "#!/bin/bash
 # start.sh directory -> rice set folder dir -> rice-sets folder dir -> lslr folder dir
 LSRL_PATH=$(dirname $(dirname $(dirname "$(readlink -f "$0")")))
 
-hyprctl reload
-hyprctl hyprpaper wallpaper ' , ~/lsrl-loaded/wallpaper/static.png, fill'
+hyprctl reload &
+
+# start if the process doesn't exist yet
+if [ $(pgrep -c hyprpaper) -eq 0 ]; then
+    hyprpaper --config ~/.config/hypr/hyprpaper.conf &
+fi
+
+# reload
+hyprctl hyprpaper wallpaper ' , ~/lsrl-loaded/wallpaper/static.png, fill' &
 
 # Example on how you should write the config arguments...
 # waybar -c ~/lsrl-loaded/.config/waybar/config.jsonc -s ~/lsrl-loaded/.config/waybar/style.css &

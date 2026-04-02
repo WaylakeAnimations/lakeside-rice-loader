@@ -1,12 +1,9 @@
 #!/bin/bash
 
-if [ $(cat ~/.config/kitty/kitty.conf | grep -c "include ~/lsrl-loaded/.config/kitty/kitty-lr.conf") -eq 0 ]; then
-    printf '\ninclude ~/lsrl-loaded/.config/kitty/kitty-lr.conf\n' | tee -a ~/.config/kitty/kitty.conf
-fi
+LSRL_PATH=$(dirname $(dirname $(dirname "$(readlink -f "$0")")))
 
-if [ $(cat ~/.config/hypr/hyprland.conf | grep -c "source = ~/lsrl-loaded/.config/hypr/hyprland-lr.conf") -eq 0 ]; then
-    printf '\nsource = ~/lsrl-loaded/.config/hypr/hyprland-lr.conf\n' | tee -a ~/.config/hypr/hyprland.conf
-fi
+bash $LSRL_PATH/text-appender.sh -b "include ~/lsrl-loaded/.config/kitty/kitty-lr.conf" "~/.config/kitty/kitty.conf"
+bash $LSRL_PATH/text-appender.sh -b "source = ~/lsrl-loaded/.config/hypr/hyprland-lr.conf" "~/.config/hypr/hyprland.conf"
 
 hyprctl reload &
 
