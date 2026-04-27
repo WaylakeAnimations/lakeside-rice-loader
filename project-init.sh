@@ -55,10 +55,10 @@ if [ $(pgrep -c hyprpaper) -eq 0 ]; then
 fi
 
 # reload
-hyprctl hyprpaper wallpaper ' , ~/lsrl-loaded/wallpaper/static.png, fill' &
+hyprctl hyprpaper wallpaper ' , ~/.lsrl-loaded/wallpaper/static.png, fill' &
 
 # Example on how you should write the config arguments...
-# waybar -c ~/lsrl-loaded/.config/waybar/config.jsonc -s ~/lsrl-loaded/.config/waybar/style.css &
+# waybar -c ~/.lsrl-loaded/.config/waybar/config.jsonc -s ~/.lsrl-loaded/.config/waybar/style.css &
 
 exit 0" > ./start.sh
 

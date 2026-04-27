@@ -72,24 +72,30 @@ else
 fi
 
 # "Close current rice set"
-bash ~/lsrl-loaded/stop.sh
+bash ~/.lsrl-loaded/stop.sh
 
 # "Replace symlink
 
 # It's REALLY important to delete the link first because without doing that,
 # the new symlink would just go inside the symlink and the current theme folder
-rm ~/lsrl-loaded
-ln -s "$LSRL_PATH/rice-sets/$RICE_SET" ~/lsrl-loaded
+rm ~/.lsrl-loaded
+ln -s "$LSRL_PATH/rice-sets/$RICE_SET" ~/.lsrl-loaded
 
 # "Start selected rice set"
-bash ~/lsrl-loaded/start.sh
+bash ~/.lsrl-loaded/start.sh
 
 # Set GTK theme and icon theme
-GTKT=$(cat ~/lsrl-loaded/rice.json | jq -r '.gtk_theme')
-ICONT=$(cat ~/lsrl-loaded/rice.json | jq -r '.icon_theme')
+GTKT=$(cat ~/.lsrl-loaded/rice.json | jq -r '.gtk_theme')
 
-gsettings set org.gnome.desktop.interface gtk-theme $GTKT
-gsettings set org.gnome.desktop.interface icon-theme $ICONT
+if [[ ! $GTKT == "none" ]]; then
+    gsettings set org.gnome.desktop.interface gtk-theme $GTKT
+fi
+
+ICONT=$(cat ~/.lsrl-loaded/rice.json | jq -r '.icon_theme')
+
+if [[ ! $ICONT == "none" ]]; then
+    gsettings set org.gnome.desktop.interface icon-theme $ICONT
+fi
 
 # Write selected rice set folder name to a file
 echo "$RICE_SET" | tee "$LSRL_PATH/current.txt"

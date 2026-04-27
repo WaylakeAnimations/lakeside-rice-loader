@@ -74,10 +74,10 @@ Keep ordering in mind, some softwares prioritize highest entry, while others pri
 # format: text-appender.sh <flag> <text> <file>
 
 # place at the bottom
-bash $LSRL_PATH/text-appender.sh -b "include ~/lsrl-loaded/.config/kitty/kitty-lr.conf" "~/.config/kitty/kitty.conf"
+bash $LSRL_PATH/text-appender.sh -b "include ~/.lsrl-loaded/.config/kitty/kitty-lr.conf" "~/.config/kitty/kitty.conf"
 
 # place at the top
-bash $LSRL_PATH/text-appender.sh -t "source = ~/lsrl-loaded/.config/foo/foo-lr.conf" "~/.config/foo/foo.conf"
+bash $LSRL_PATH/text-appender.sh -t "source = ~/.lsrl-loaded/.config/foo/foo-lr.conf" "~/.config/foo/foo.conf"
 ```
 
 Most softwares won't complain about missing file in `include` entries if it has value(s) it can fall back to, so you don't have to worry about removing those in most cases...

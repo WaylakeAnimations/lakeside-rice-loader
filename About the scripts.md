@@ -19,8 +19,8 @@ Flags:
 
 ### How it works _(in order):_
 
-- "Close previous rice" with `~/lsrl-loaded/stop.sh`
-- Symlink newly selected rice set folder to `~/lsrl-loaded` for easier access
+- "Close previous rice" with `~/.lsrl-loaded/stop.sh`
+- Symlink newly selected rice set folder to `~/.lsrl-loaded` for easier access
 - Execute `./lsrl-loaded/start.sh`
 - Apply GTK and icon theme specified by the rice set
 - Write the name of applied rice set to `./current.txt`
