@@ -16,17 +16,11 @@ flags:
     exit 0
 fi
 
-# hacky-ish way to handle ~ inside quotes, of course, flush first in case it exist
-rm /tmp/lslr-apd.txt
-echo "$3" > /tmp/lslr-apd.txt
-sed -i "s|~|${HOME}|g" /tmp/lslr-apd.txt
+# handle ~ inside quotes
+FILE=$(echo "$3" | sed "s|~|${HOME}|g")
 
-# store here
+# store text
 TEXT="$2"
-FILE=$(cat /tmp/lslr-apd.txt)
-
-# clean up after $FILE take it
-rm /tmp/lslr-apd.txt
 
 # verify flag
 if [ "$1" = "-t" ] || [ "$1" = "-b" ]; then
